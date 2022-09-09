@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>William Touboul</title>
+
+    <link rel="icon" type="image/png" href="../../assets/images/rect.svg" sizes="16x16">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            height: 100vh;
+            width: 36vw;
+            margin: 0;
+            padding: 0;
+            margin-left: calc(50% - 18vw);
+            overflow: hidden;
+            position: relative;
+        }
+
+        img {
+            height: 110%;
+            width: 110%;
+            position: absolute;
+            left: -10%;
+            top: -5%;
+            object-fit: cover;
+        }
+
+        @media screen and (max-width : 850px) {
+            .container {
+                width: 95vw;
+                margin-left: 0;
+            }
+        }
+
+        img:hover {
+            filter: url(#turbulence)
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+
+    <div class="container">
+        <img src="pexels-mathias-reding-13046522.jpg" id="solo" alt="">
+    </div>
+    <!-- Container pour evité des déformations sur les contours de l'image-->
+
+    <svg>
+        <filter id="turbulence">
+            <feTurbulence baseFrequency=".01" result="turbulence" id="feTurb" type="turbulence" numOctaves="1">
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="20">
+            </feDisplacementMap>
+        </filter>
+    </svg>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+
+    <script>
+        document.querySelector('#solo').addEventListener('mouseover', function () {
+            console.log('duhduhuhu');
+            gsap.to('#feTurb', {
+                attr: {
+                    ['baseFrequency']: '.02'
+                },
+                duration: 3,
+                ease: 'none',
+                repeat: -1
+            })
+        })
+    </script>
+</body>
+
+</html>
